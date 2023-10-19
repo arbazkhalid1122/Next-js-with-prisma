@@ -1,7 +1,0 @@
-[build]
-command = "npm run netlify-build"
-functions = "netlify/functions"
-publish = ".next"
-
-[template.environment]
-DATABASE_URL = "Database URL"
