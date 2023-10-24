@@ -12,15 +12,13 @@ export default async function login(
 ) {
   await DbConnect()
   if (req.method === 'GET') {
-    const data = req.body
-    console.log(data);
-    res.json(data)
+    const user = await NewUsers.find()
+    // console.log(user);
     
-  }
+      }
    else if (req.method === 'POST') {
       const {email, password} = req.body;
       try {
-        // NewUsers(data)
         const registeredUser = await NewUsers({
           email,
           password
@@ -31,7 +29,7 @@ export default async function login(
         if(NewUsers) {
           res.status(201).json({success: true,message:'User created successfully'})
         } else  {
-          
+
         }
       } catch (error) {
         console.log(error);
