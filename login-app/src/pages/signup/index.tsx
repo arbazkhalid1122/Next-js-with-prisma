@@ -1,11 +1,13 @@
-
+// 'use client'
 import Link from 'next/link';
 import styles from '../login/login.module.scss';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 export default function Signup() {
 
 
+const nav = useRouter()
 
   const handleSubmit = async(event:any) => {
     event.preventDefault();
@@ -17,7 +19,10 @@ export default function Signup() {
 
     try {
       const res =  axios.post('http://localhost:3000/api/hello',data)
-      console.log(res);
+      const result = (await res).data 
+      if(result.success){
+      const route = nav.push('/home')
+      }
       
     } catch (error) {
       console.log(error);
