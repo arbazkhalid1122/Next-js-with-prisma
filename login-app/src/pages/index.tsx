@@ -1,12 +1,17 @@
-import { Inter } from 'next/font/google'
-import Login from './login'
-const inter = Inter({ subsets: ['latin'] })
+import Component from '@/component'
+import Login from '../pages/login'
 
-export default function Home() {
+function Home() {
+
   return (
-<Login/>
+    <div>
+      
+       <Component/>
+      
+    </div>
   )
 }
 
+export default Home
 
 

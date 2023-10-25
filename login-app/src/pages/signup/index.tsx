@@ -18,10 +18,10 @@ const nav = useRouter()
     }
 
     try {
-      const res =  axios.post('http://localhost:3000/api/hello',data)
+      const res =  axios.post('http://localhost:3000/api/Signup',data)
       const result = (await res).data 
-      if(result.success){
-      const route = nav.push('/home')
+      if(result.reg){
+       nav.push('/home')
       }
       
     } catch (error) {
