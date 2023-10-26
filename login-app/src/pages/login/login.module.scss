@@ -1,4 +1,4 @@
-.main{
+.main {
   background-color: #503006;
   display: flex;
   align-items: center;
@@ -8,36 +8,33 @@
   padding: 50px;
   width: fit-content;
 
+  input {
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+  }
 
-input{
-  padding: 15px;
-  border: none;
-  border-radius: 5px;
-  outline: none;
+  button {
+    background-color: #503006;
+    color: white;
+    width: 100%;
+    height: 40px;
+    outline: none;
+    border: 1px solid white;
+    padding: 5px;
+    border-radius: 10px;
+  }
 }
 
-button{
-  background-color: #503006;
+.container {
+  display: flex;
   color: white;
-  width: 100%;
-  height: 40px;
-  outline: none;
-  border: 1px solid white;
-  padding: 5px;
-  border-radius: 10px;
-}
+  align-items: center;
+  justify-content: center;
+  background-color: black;
 }
 
-
-.container{
-    display: flex;
-    color: white;
-    align-items: center;
-    justify-content: center;
-    background-color: black;
-}
-
-
-.signup{
-    color: white;
+.signup {
+  color: white;
 }
