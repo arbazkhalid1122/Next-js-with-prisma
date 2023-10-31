@@ -11,6 +11,11 @@ export default async function Signup(
 
   if (req.method === "POST") {
     const { email, password } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ error: "Email is required." });
+    }
+
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     const find = await NewUsers.findOne({ email });
@@ -28,6 +33,7 @@ export default async function Signup(
             .status(201)
             .json({ success: true, message: "User created successfully" });
         } else {
+          // You might want to handle this case too.
         }
       } catch (error) {
         console.log(error);

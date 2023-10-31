@@ -1,8 +1,8 @@
-// 'use client'
 import Link from "next/link";
 import styles from "../login/login.module.scss";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { signUpWithGoogle } from "../googleAuth/auth";
 
 export default function Signup() {
   const nav = useRouter();
@@ -26,6 +26,23 @@ export default function Signup() {
     }
   };
 
+  const handleGoogleProvider = async () => {
+    try {
+      const userData = await signUpWithGoogle();
+      console.log(userData, "userData");
+      const data = {
+        email: userData?.email,
+      };
+      const res = axios.post("http://localhost:3000/api/Signup", data);
+      const result = (await res).data;
+      if (result.reg) {
+        nav.push("/home");
+      }
+    } catch (error) {
+      console.error("Error in handleGoogleProvider:", error);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit}>
@@ -44,6 +61,8 @@ export default function Signup() {
             name="confirm"
           />
           <button type="submit">Signup</button>
+          <button onClick={handleGoogleProvider}>Sign in with google</button>
+
           <Link href="/login" className={styles.signup}>
             Login
           </Link>
