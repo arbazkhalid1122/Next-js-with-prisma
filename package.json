@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "bcrypt": "^5.1.1",
-    "firebase": "^10.5.0"
-  },
-  "devDependencies": {
-    "prettier": "3.0.3"
-  }
-}
