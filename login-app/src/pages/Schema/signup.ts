@@ -8,6 +8,9 @@ const newUserSchema = new mongoose.Schema({
   password: {
     type: String,
   },
+  loginWith: {
+    type: Boolean,
+  },
 });
 
 export const NewUsers =

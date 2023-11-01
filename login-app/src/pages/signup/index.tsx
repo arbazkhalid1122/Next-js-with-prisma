@@ -18,7 +18,9 @@ export default function Signup() {
     try {
       const res = axios.post("http://localhost:3000/api/Signup", data);
       const result = (await res).data;
-      if (result.reg) {
+      console.log(result);
+
+      if (result.success) {
         nav.push("/home");
       }
     } catch (error) {
@@ -32,10 +34,13 @@ export default function Signup() {
       console.log(userData, "userData");
       const data = {
         email: userData?.email,
+        loginWith: true,
       };
-      const res = axios.post("http://localhost:3000/api/Signup", data);
+      const res = await axios.post("http://localhost:3000/api/Signup", data);
       const result = (await res).data;
-      if (result.reg) {
+      console.log(res, "result");
+
+      if (result.success) {
         nav.push("/home");
       }
     } catch (error) {
@@ -61,13 +66,13 @@ export default function Signup() {
             name="confirm"
           />
           <button type="submit">Signup</button>
-          <button onClick={handleGoogleProvider}>Sign in with google</button>
 
           <Link href="/login" className={styles.signup}>
             Login
           </Link>
         </div>
       </form>
+      <button onClick={handleGoogleProvider}>Sign in with google</button>
     </div>
   );
 }
