@@ -1,16 +1,19 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { signUpWithGoogle } from "../googleAuth/auth";
-import { useRouter } from "next/router";
-import { getAuth } from "firebase/auth"; // Import the getAuth function
+import { useRouter } from 'next/router';
 
 export default function Home() {
   const [val, setVal] = useState(null);
   const [data, setData] = useState([]);
+  const router = useRouter();
 
-  const handle = (e: any) => {
-    setVal(e.target.value);
-  };
+  useEffect(()=>{
+    const token = localStorage.getItem('accessToken');
+    if(!token){
+      router.push('/login')
+    }
+  })
+
 
   useEffect(() => {
     const load = async () => {
@@ -21,7 +24,9 @@ export default function Home() {
     load();
   }, []);
 
-  const router = useRouter();
+  const handle = (e: any) => {
+    setVal(e.target.value);
+  };
 
   const finish = async () => {
     const data = {

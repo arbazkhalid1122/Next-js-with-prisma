@@ -18,14 +18,33 @@ export default function Login() {
       password: password,
     };
 
-    const res = axios.post("http://localhost:3000/api/login", data);
-    const response = await res;
-
-    if (response.data) {
-      localStorage.setItem("id", response.data._id);
-      nav.push("./home");
+    try {
+      const res = await axios.post("http://localhost:3000/api/login", data);
+      if (res.data) {
+        localStorage.setItem("accessToken", res.data.accessToken);
+        localStorage.setItem("refreshToken", res.data.refreshToken);
+        nav.push("./home");
+      }                                       
+    } catch (error:any) {
+      if (error.response && error.response.status === 401) {
+        // alert("Access token expired. Trying to refresh the token.");
+        // const refreshData = {
+        //   refreshToken: localStorage.getItem("refreshToken"),
+        // };
+        // As there is no refresh API, we will directly alert the user to login again.
+        alert("Please login again.");
+        nav.push("/login");
+          // localStorage.setItem("accessToken", refreshRes.data.accessToken);
+          // nav.push("./home");
+        // } else {
+        //   alert("Refresh token also expired. Please login again.");
+        //   nav.push("/login");
+        // }
+      }
     }
   };
+
+ 
 
   const router = useRouter();
 
