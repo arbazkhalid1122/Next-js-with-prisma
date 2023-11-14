@@ -3,7 +3,6 @@ import "./login.module.scss";
 import styles from "./login.module.scss";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 
 export default function Login() {
   const nav = useRouter();
@@ -17,36 +16,28 @@ export default function Login() {
       email: email,
       password: password,
     };
-
     try {
       const res = await axios.post("http://localhost:3000/api/login", data);
-      if (res.data) {
+      console.log(res?.data?.accessToken);
+      
+      if (res?.data?.accessToken) {
         localStorage.setItem("accessToken", res.data.accessToken);
         localStorage.setItem("refreshToken", res.data.refreshToken);
         nav.push("./home");
+      }
+      else{
+        localStorage.clear()
       }                                       
     } catch (error:any) {
       if (error.response && error.response.status === 401) {
-        // alert("Access token expired. Trying to refresh the token.");
-        // const refreshData = {
-        //   refreshToken: localStorage.getItem("refreshToken"),
-        // };
-        // As there is no refresh API, we will directly alert the user to login again.
         alert("Please login again.");
         nav.push("/login");
-          // localStorage.setItem("accessToken", refreshRes.data.accessToken);
-          // nav.push("./home");
-        // } else {
-        //   alert("Refresh token also expired. Please login again.");
-        //   nav.push("/login");
-        // }
       }
     }
   };
 
  
 
-  const router = useRouter();
 
   return (
     <div className={styles.container}>
